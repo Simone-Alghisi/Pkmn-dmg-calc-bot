@@ -35,7 +35,7 @@ WEATHER_DICT = {'None': 'Sun', 'Sun': 'Rain', 'Rain': 'Sand', 'Sand': 'Hail', 'H
 BOOST_DICT = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: -1, -1: -2, -2: -3, -3: -4, -4: -5, -5: -6, -6: 0}
 # Error Message
 # TODO... change this to your discretion
-ERROR_MSG = "An unexpected error occurred and the conversation ended: please try again.\nIf the problem persists, notify to @Alghisius"
+ERROR_MSG = "An unexpected error occurred and the conversation ended: please try again.\nIf the problem persists, please open an issue (https://github.com/Simone-Alghisi/Pkmn-dmg-calc-bot/issues/new) to notify a bug.\nIn the issue, it would be great if you could also specify what you were doing: e.g. __I was trying to pick a nature__, __I selected the Life Orb__, ... I know: I'm asking a lot out from you ;-)"
 
 def calc_damage():
   return ConversationHandler(
@@ -1312,10 +1312,10 @@ def calculate(update, context):
     move = context.user_data['move']
     field = context.user_data['field']
     file_name = context.user_data['user_id']
-    path = f"pending_take_dmg/{file_name}"
+    path = f"pending_calc_dmg/{file_name}"
     write_request(path, attacker, defender, move, field)
-    process = subprocess.Popen([f'npm start {file_name} pending_take_dmg result_take_dmg'], shell=True)
-    destination = f"result_take_dmg/{file_name}"
+    process = subprocess.Popen([f'npm start {file_name} pending_calc_dmg result_calc_dmg'], shell=True)
+    destination = f"result_calc_dmg/{file_name}"
     process.wait()
     text_to_return = ""
     try:
@@ -1338,7 +1338,7 @@ def calculate(update, context):
       logger.error("To put it simply the defender pokémon exploded for no reason in calculate")
     elif not 'move' in context.user_data:
       logger.error("To put it simply the move exploded for no reason in calculate")
-    elif not 'fiedl' in context.user_data:
+    elif not 'field' in context.user_data:
       logger.error("To put it simply the field exploded for no reason in calculate")
     else:
       logger.error("To put it simply the user_id exploded for no reason in calculate")
