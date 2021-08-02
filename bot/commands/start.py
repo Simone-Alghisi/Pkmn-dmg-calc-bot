@@ -5,7 +5,7 @@ start_message = """Hi {}, this is a bot to calculate the damage output given a D
 Please use /help for a full list of commands.
 
 Credits obviously to Smogon for the damage calculator implementation.
-If you receive some kind of error you can contact @Alghisius and hope that he'll fix that soon... maybe"""  
+If you receive some kind of error you can open an issue on Github and hope that the developer will fix that soon... (further details using /help)"""  
 
 def start(update: Update, context: CallbackContext) -> None:
   update.message.reply_text(start_message.format(update.effective_user.first_name))

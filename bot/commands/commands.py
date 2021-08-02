@@ -6,4 +6,4 @@ def get_commands():
   return [ ( 'help', help_function ), ( 'start', start ) ]
 
 def get_conversations():
-  return [ calc_damage() ]
+  return [ calc_damage ]

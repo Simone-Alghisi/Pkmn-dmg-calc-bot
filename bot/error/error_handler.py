@@ -7,6 +7,7 @@ import traceback
 import logging
 import os
 
+load_dotenv()
 DEVELOPER_CHAT_ID = os.getenv('DEVELOPER_CHAT_ID')
 
 logging.basicConfig(

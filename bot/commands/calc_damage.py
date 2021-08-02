@@ -37,9 +37,9 @@ BOOST_DICT = {0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: -1, -1: -2, -2: -3, -3: -4,
 # TODO... change this to your discretion
 ERROR_MSG = "An unexpected error occurred and the conversation ended: please try again.\nIf the problem persists, please open an issue (https://github.com/Simone-Alghisi/Pkmn-dmg-calc-bot/issues/new) to notify a bug.\nIn the issue, it would be great if you could also specify what you were doing: e.g. __I was trying to pick a nature__, __I selected the Life Orb__, ... I know: I'm asking a lot out from you ;-)"
 
-def calc_damage():
+def calc_damage(valid_users=None):
   return ConversationHandler(
-    entry_points=[CommandHandler('calc_damage', start)],
+    entry_points=[CommandHandler('calc_damage', start, Filters.user(user_id=[valid_users]))] if valid_users else [CommandHandler('calc_damage', start)],
       states={
         FIRST: [
           CallbackQueryHandler(retrieve_pkmn, pattern='^[A-Z]{1}$'),
@@ -718,7 +718,7 @@ def next_opponent(update, context):
           text=choices_to_display, reply_markup=reply_markup
       )
     else:
-      query.answer(text='No previous information to display')
+      query.answer(text='No further information to display')
     return TENTH
   else:
     query.answer()
